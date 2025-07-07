@@ -22,14 +22,16 @@ public class ActivityController {
         return ResponseEntity.ok(activityService.trackActivity(activity));
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("user/{userId}")
     public ResponseEntity<List<ActivityResponse>> getAllActivitites(@PathVariable String userId){
         return ResponseEntity.ok(activityService.getUserActivities(userId));
     }
 
-    @GetMapping("/{activityId}")
+    @GetMapping("activity/{activityId}")
     public ResponseEntity<ActivityResponse> getActivityByActivityID(@PathVariable String activityId){
         return ResponseEntity.ok(activityService.getUserActivityById(activityId));
     }
+
+
 
 }

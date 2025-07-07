@@ -43,6 +43,12 @@ public class UserService {
         userResponse.setLastName(savedUser.getLastName());
         userResponse.setPassword(savedUser.getPassword());
         userResponse.setRole(savedUser.getRole());
+        userResponse.setCreatedAt(savedUser.getCreatedAt());
+        userResponse.setUpdatedAt(savedUser.getUpdatedAt());
         return userResponse;
+    }
+
+    public Boolean existByUserId(String userId) {
+        return userRepository.existsById(userId);
     }
 }
