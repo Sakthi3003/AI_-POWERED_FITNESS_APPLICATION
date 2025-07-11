@@ -23,14 +23,15 @@ public class UserService {
 
     public UserResponse register(@Valid RegisterRequest registerRequest) {
         if(userRepository.existsByEmail(registerRequest.getEmail())){
-            throw new RuntimeException("Email already exists");
+            User existingUser = userRepository.findByEmail(registerRequest.getEmail());
+            return convertToUserResponse(existingUser);
         }
         User user = new User();
         user.setEmail(registerRequest.getEmail());
         user.setPassword(registerRequest.getPassword());
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
-
+        user.setKeycloakId(registerRequest.getKeycloakId());
         User savedUser = userRepository.save(user);
         return convertToUserResponse(savedUser);
     }
@@ -45,10 +46,15 @@ public class UserService {
         userResponse.setRole(savedUser.getRole());
         userResponse.setCreatedAt(savedUser.getCreatedAt());
         userResponse.setUpdatedAt(savedUser.getUpdatedAt());
+        userResponse.setKeycloakId(savedUser.getKeycloakId());
         return userResponse;
     }
 
     public Boolean existByUserId(String userId) {
         return userRepository.existsById(userId);
+    }
+
+    public Boolean existByKeyCloakId(String keycloakId) {
+        return userRepository.existsByKeycloakId(keycloakId);
     }
 }

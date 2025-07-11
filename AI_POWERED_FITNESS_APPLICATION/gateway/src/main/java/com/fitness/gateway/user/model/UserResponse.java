@@ -1,10 +1,7 @@
-package com.fitness.userservice.model;
+package com.fitness.gateway.user.model;
 
-import com.fitness.userservice.entity.UserRole;
-import jakarta.persistence.*;
+
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +13,7 @@ public class UserResponse {
     private String firstName;
     private String lastName;
     private String keycloakId;
-    private UserRole role = UserRole.USER;
+    private String role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
